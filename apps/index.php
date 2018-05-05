@@ -11,7 +11,7 @@
 <?php include "navbar.php" ?>
 
 <div class="container">
-    <?php include "read.php" ?>
+    <?php include "read_method.php" ?>
 
     <h2>Stock Data</h2>
     <table class="table table-hover">

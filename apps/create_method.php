@@ -1,6 +1,4 @@
 <?php
-    include "required.php";
-
     if (isset($_POST['ticker'])
         && isset($_POST['sector'])
         && isset($_POST['country'])
@@ -9,6 +7,8 @@
         && isset($_POST['company'])
     )
     {
+        include "required.php";
+
         $ticker = $_POST['ticker'];
         $sector = $_POST['sector'];
         $country = $_POST['country'];
@@ -17,14 +17,14 @@
         $company = $_POST['company'];
 
         $insertResult = $collection->insertOne([
-            'ticker' => $ticker,
-            'sector' => $sector,
-            'country' => $country,
-            'price' => $price,
-            'industry' => $industry,
-            'company' => $company,
+            'Ticker' => $ticker,
+            'Sector' => $sector,
+            'Country' => $country,
+            'Price' => $price,
+            'Industry' => $industry,
+            'Company' => $company,
         ]);
-//        var_dump($insertResult->getInsertedCount());
+        
         if ($insertResult->getInsertedCount() > 0)
         {
             ?>
