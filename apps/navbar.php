@@ -6,7 +6,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="index.php">Read</a></li>
                 <li><a href="create.php">Create</a></li>
-                <li><a href="#">Update</a></li>
+                <li><a href="update.php">Update</a></li>
                 <li><a href="#">Delete</a></li>
                 <li><a href="search.php">Search</a></li>
             </ul>

@@ -10,17 +10,17 @@
             $skip = $_GET['page'];
         }
 
-        $skip_val = ($skip - 1) * $dataPerPage;
+        $skipVal = ($skip - 1) * $dataPerPage;
 
         $results = $collection->find(
             [],
             [
                 'limit' => $dataPerPage,
-                'skip' => $skip_val,
-
+                'skip' => $skipVal,
             ]
         );
 
+//        var_dump($results);
         return $results;
     }
 ?>

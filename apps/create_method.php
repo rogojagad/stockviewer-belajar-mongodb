@@ -24,7 +24,7 @@
             'Industry' => $industry,
             'Company' => $company,
         ]);
-        
+
         if ($insertResult->getInsertedCount() > 0)
         {
             ?>
