@@ -6,6 +6,8 @@ Membuat aplikasi menggunakan PHP untuk mengimplementasikan
 penggunaan database NoSQL menggunakan MongoDB. Tugas ini
 menggunakan layanan MongoDB Atlas sebagai platform databasenya.
 
+Dataset yang digunakan : http://jsonstudio.com/wp-content/uploads/2014/02/stocks.zip
+
 ## Cara Menjalankan
 * Pastikan sudah menginstall dan mengaktifkan MongoDB driver
 pada file `php.ini` sistem anda. Tugas ini menggunakan PHP 7.0.28
