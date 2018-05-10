@@ -9,8 +9,8 @@
 </head>
 <body>
 <?php include "navbar.php" ?>
-
     <div class="container">
+        <h2>Search Data by Ticker Name</h2><br>
         <form action="search.php" method="post">
             <div class="form-group">
                 <label for="ticker">Ticker name:</label>

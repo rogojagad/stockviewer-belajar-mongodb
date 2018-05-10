@@ -1,11 +1,12 @@
 <?php
     if (isset($_POST['type']))
     {
-        include "required.php";
+        include 'required.php';
+//        echo $_POST['type'];
         if ($_POST['type'] == 'search-data')
         {
             $needle = $_POST['ticker-target'];
-//            echo $needle;
+
             $filter = ['Ticker' => $needle];
 
             $matchedCount = $collection->count($filter);
@@ -15,75 +16,65 @@
                 $results = $collection->find($filter);
 
                 foreach ($results as $result)
+                {
                     $ticker = $result['Ticker'];
                     $sector = $result['Sector'];
                     $country = $result['Country'];
                     $price = $result['Price'];
                     $industry = $result['Industry'];
                     $company = $result['Company'];
+                }
                 ?>
-
                 <br>
                 <h4>Data to be Updated</h4>
                 <form method="post" action="update.php">
                     <div class="form-group">
                         <label for="ticker-target">Ticker Name:</label>
-                        <input type="text" class="form-control" id="ticker" name="ticker" value=<?php echo $ticker; ?> required>
-                        <input name="type" value="update-data" hidden>
+                        <input type="text" class="form-control" id="ticker" name="ticker" value=<?php echo $ticker; ?> required disabled>
+                        <input name="type" value="delete-data" hidden>
                         <input name="ticker-target" value=<?php echo $ticker; ?> hidden>
                     </div>
 
                     <div class="form-group">
                         <label for="ticker-target">Sector Name:</label>
-                        <input type="text" class="form-control" id="sector" name="sector" value=<?php echo $sector; ?> required>
+                        <input type="text" class="form-control" id="sector" name="sector" value=<?php echo $sector; ?> required disabled>
                     </div>
 
                     <div class="form-group">
                         <label for="ticker-target">Country Name:</label>
-                        <input type="text" class="form-control" id="country" name="country" value=<?php echo $country; ?> required>
+                        <input type="text" class="form-control" id="country" name="country" value=<?php echo $country; ?> required disabled>
                     </div>
 
                     <div class="form-group">
                         <label for="ticker-target">Price:</label>
-                        <input type="text" class="form-control" id="price" name="price" value=<?php echo $price; ?> required>
+                        <input type="text" class="form-control" id="price" name="price" value=<?php echo $price; ?> required disabled>
                     </div>
 
                     <div class="form-group">
                         <label for="ticker-target">Industry Name:</label>
-                        <input type="text" class="form-control" id="industry" name="industry" value=<?php echo $industry; ?> required>
+                        <input type="text" class="form-control" id="industry" name="industry" value=<?php echo $industry; ?> required disabled>
                     </div>
 
                     <div class="form-group">
                         <label for="ticker-target">Company Name:</label>
-                        <input type="text" class="form-control" id="company" name="company" value=<?php echo $company; ?> required>
+                        <input type="text" class="form-control" id="company" name="company" value=<?php echo $company; ?> required disabled>
                     </div>
 
-                    <button type="submit" class="btn btn-default">Update</button>
+                    <button type="submit" class="btn btn-default">Delete</button><br>
                 </form>
                 <?php
             }
-            else
-            {
+            else{
                 echo '<h3>No matching record found</h3>';
             }
         }
-        elseif ($_POST['type'] == 'update-data')
+        elseif ($_POST['type'] == 'delete-data')
         {
-            $newData = [
-                'Ticker' => $_POST['ticker'],
-                'Sector' => $_POST['sector'],
-                'Country' => $_POST['country'],
-                'Price' => $_POST['price'],
-                'Industry' => $_POST['industry'],
-                'Company' => $_POST['company'],
-            ];
+            $filter = ['Ticker' => $_POST['ticker-target']];
 
-            $updateResult = $collection->updateOne(
-                ['Ticker' => $_POST['ticker-target']],
-                ['$set' => $newData]
-            );
+            $deleteResult = $collection->deleteOne($filter);
 
-            if ($updateResult->getModifiedCount())
+            if ($deleteResult->getDeletedCount() > 0)
             {
                 ?>
                 <div id="succesModal" class="modal fade" role="dialog">
@@ -93,16 +84,10 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Update Success</h4>
+                                <h4 class="modal-title">Delete Success</h4>
                             </div>
                             <div class="modal-body">
-                                <p>Object ID: </p><?php echo $updateResult->getUpsertedId()?>
-                                <p>Ticker: </p><?php echo $_POST['ticker'];?>
-                                <p>Sector: </p><?php echo $_POST['sector'];?>
-                                <p>Country: </p><?php echo $_POST['country'];?>
-                                <p>Price: </p><?php echo $_POST['price'];?>
-                                <p>Industry: </p><?php echo $_POST['industry'];?>
-                                <p>Company: </p><?php echo $_POST['company'];?>
+                                <p><?php echo $deleteResult->getDeletedCount(); ?> data(s) deleted succesfully</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
