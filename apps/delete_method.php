@@ -26,8 +26,8 @@
                 }
                 ?>
                 <br>
-                <h4>Data to be Updated</h4>
-                <form method="post" action="update.php">
+                <h4>Data to be Deleted</h4>
+                <form method="post" action="delete.php">
                     <div class="form-group">
                         <label for="ticker-target">Ticker Name:</label>
                         <input type="text" class="form-control" id="ticker" name="ticker" value=<?php echo $ticker; ?> required disabled>
