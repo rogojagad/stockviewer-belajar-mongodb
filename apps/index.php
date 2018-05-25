@@ -27,18 +27,22 @@
         </thead>
         <tbody>
             <?php
-            $results = selectWithPagination($collection);
-
-            foreach($results as $result)
-            {
-                echo '<tr>';
-                echo '<td>', $result['Ticker'], '</td>';
-                echo '<td>', $result['Sector'], '</td>';
-                echo '<td>', $result['Country'], '</td>';
-                echo '<td>', $result['Price'], '</td>';
-                echo '<td>', $result['Industry'], '</td>';
-                echo '<td>', $result['Company'], '</td>';
-                echo '</tr>';
+            try{
+                $results = selectWithPagination($collection);
+                
+                foreach($results as $result)
+                {
+                    echo '<tr>';
+                    echo '<td>', $result['Ticker'], '</td>';
+                    echo '<td>', $result['Sector'], '</td>';
+                    echo '<td>', $result['Country'], '</td>';
+                    echo '<td>', $result['Price'], '</td>';
+                    echo '<td>', $result['Industry'], '</td>';
+                    echo '<td>', $result['Company'], '</td>';
+                    echo '</tr>';
+                }
+            } catch(Exception $error){
+                echo $error->message;
             }
             ?>
         </tbody>
